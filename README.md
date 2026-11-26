@@ -1,33 +1,38 @@
-# .NET and Database Coursework
+# .NET Application Development Coursework
 
-ITAM coursework on Windows desktop application development, relational databases, C# class libraries, and Excel automation.
+Exercises from ITAM’s application development coursework. The projects cover C# desktop applications, ASP.NET Web Forms, relational databases, class libraries, and Excel automation.
 
-| Folder | Contents |
-| --- | --- |
-| [Student records](student-records/SistemaAlumnos/) | A C# and WPF desktop app for adding, finding, updating, and deleting records in SQL Server. |
-| [Ride-sharing SQL](ride-sharing-sql/) | SQL scripts and the original assignment for modeling a ride-sharing database. |
-| [.NET libraries](dotnet-libraries/) | C# class-library exercises and a WPF application that loads one of the libraries. |
-| [Excel automation](excel-automation/) | A Windows Excel interop exercise and practice workbooks, including a macro-enabled workbook. |
-| [Desktop exercises](desktop-exercises/) | SmartCalc, a matrix calculator, and a separate student-records coursework variant. |
-| [Exam practice](exam-practice/Repaso2/) | Applicant registration in WPF and a payroll example in ASP.NET Web Forms. |
-| [Web Forms exercises](web-forms/) | Video-game examples and exercises in controls, cookies, and sessions. |
+## Project index
 
-## Build and explore
+| Project | What it does | Setup |
+| --- | --- | --- |
+| [SmartCalc](desktop/smart-calculator/SmartCalc.sln) | A WPF calculator with a dynamically created interface. | WPF |
+| [Matrix calculator](desktop/matrix-calculator/matrixCalc.sln) | A WPF exercise for working with matrices. | WPF |
+| [Sistema Alumnos](desktop/student-records/original/SistemaAlumnos.csproj) | Adds, searches for, updates, and deletes student records. Start with this version. | WPF, SQL Server |
+| [Sistema Alumnos coursework variant](desktop/student-records/coursework-variant/SistemaAlumnos/SistemaAlumnos.sln) | A separate version with different record-handling and form code. | WPF, SQL Server |
+| [Applicant registration](desktop/applicant-registration/RegistroAspirantes.sln) | A desktop exercise for registering applicants and generating a report. | WPF, SQL Server |
+| [Payroll](web-forms/payroll/Sueldo.sln) | Payroll entry and reporting pages. | Web Forms, ODBC |
+| [Video games](web-forms/video-games/videojuegos.sln) | A set of database-backed pages for a video game exercise. | Web Forms, ODBC |
+| [Video games lab](web-forms/video-games-lab/videojuegos/videojuegos.sln) | A separate lab version of the video game exercise. | Web Forms, ODBC |
+| [Web controls](web-forms/controls/usoControles/usoControles.sln) | Exercises using server-side form controls. | Web Forms |
+| [Sessions and cookies](web-forms/sessions-and-cookies/PruebaSessionCookies.sln) | Exercises in maintaining state with sessions and cookies. | Web Forms |
+| [Ride-sharing SQL](databases/ride-sharing/) | SQL scripts and an assignment for modeling a ride-sharing database. | SQL Server |
+| [Class library 1](libraries/pruebaDll1/pruebaDll1.sln) and [class library 3](libraries/pruebaDll3/pruebaDll3.sln) | Standalone exercises in building C# DLLs. | .NET Framework |
+| [DLL demo](libraries/EjecutaPruebaDLL1/EjecutaPruebaDLL1.sln) | A WPF application that uses the first class library. | WPF, Class library 1 |
+| [Excel interop](excel/prubeaDll2/prubeaDll2.sln) and [workbooks](excel/Excel/) | An Office interop exercise and Excel practice files, including macros. | Desktop Excel, Office COM |
 
-The C# projects target .NET Framework 4.7.2. Use Windows with Visual Studio or Visual Studio Build Tools and the .NET Framework 4.7.2 targeting pack. From a Developer Command Prompt, build the student project with:
+## Build and run on Windows
+
+Use Visual Studio or Visual Studio Build Tools with the **.NET Framework 4.7.2 targeting pack**. Open a solution above in Visual Studio, or run MSBuild from a Developer Command Prompt at the repository root. For example:
 
 ~~~cmd
-msbuild student-records\SistemaAlumnos\SistemaAlumnos.csproj /t:Build
+msbuild desktop\smart-calculator\SmartCalc.sln /t:Build
 ~~~
 
-The student app reads its SQL Server connection from the project’s App.config settings. The checked-in example uses Windows authentication and LocalDB. Configure a local database with the schema expected by the project’s dataset before testing student-record operations.
+- **Desktop database apps:** Configure the local database in each project’s App.config. The examples use Windows authentication with LocalDB. Use the dataset definitions as a schema reference.
+- **Web Forms:** Install the Visual Studio web build tools and restore the solution’s NuGet packages. For local database exercises, set `COURSEWORK_PAYROLL_ODBC` or `COURSEWORK_VIDEOGAMES_ODBC` with a connection string for a disposable database and the appropriate ODBC driver.
+- **DLL demo:** Build Class library 1 in Debug first. The demo references that output by relative path.
+- **Excel interop:** Use desktop Excel and the Office COM references the project declares. Review macro-enabled workbooks before enabling macros.
+- **SQL scripts:** Read the assignment and scripts before running them in a disposable SQL Server database.
 
-Build pruebaDll1 in Debug before building EjecutaPruebaDLL1, which references that build output. The Excel interop project requires desktop Excel and the Office COM references declared in its project file. Review the macro-enabled workbook before enabling macros.
-
-The ride-sharing scripts are independent from the student app. Review them before executing them against a disposable SQL Server database.
-
-## Additional Windows exercises
-
-Open the original solution for each exercise. For SmartCalc, use [SmartCalc.sln](desktop-exercises/SmartCalc/SmartCalc.sln). The [student-records variant](desktop-exercises/SistemaAlumnos/) is separate from the app in student-records. It includes different record handling and form code.
-
-ASP.NET Web Forms projects require the Visual Studio web build tools and a NuGet restore. The payroll and video-game examples read local ODBC connection strings from COURSEWORK_PAYROLL_ODBC and COURSEWORK_VIDEOGAMES_ODBC, respectively. Set them for a disposable local database and use the appropriate ODBC driver. The desktop database exercises use their App.config settings with a LocalDB example. Treat these as local coursework demos.
+The folder and solution paths were checked. Building and running the exercises requires the tooling and local databases described above.
